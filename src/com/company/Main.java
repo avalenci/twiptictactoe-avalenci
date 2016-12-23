@@ -13,8 +13,12 @@ public class Main {
         int xCoord = 0, yCoord = 0;
         while (true) {
             System.out.println("Type \"Next\" to keep the game going.");
-            String firstPlayer = AI.firstPlayer();
+            String player = AI.firstPlayer();
             while (true) {
+                if (player.equalsIgnoreCase("X"))
+                    player = "O";
+                else
+                    player = "X";
                 if (turns == 0) {
                     String c = AI.firstMove();
                     String x = (c.substring(0, 1));
@@ -22,24 +26,39 @@ public class Main {
                     xCoord = Integer.parseInt(x);
                     yCoord = Integer.parseInt(y);
                 }
+                if (turns == 1) {
+                    String c = AI.secondMove(xCoord, yCoord);
+                    String x = (c.substring(0, 1));
+                    String y = (c.substring(1));
+                    xCoord = Integer.parseInt(x);
+                    yCoord = Integer.parseInt(y);
+                }
                 if (!((input.nextLine()).equalsIgnoreCase("Next")))
                     continue;
-                while (firstPlayer.equalsIgnoreCase("X")) {
+                while (player.equalsIgnoreCase("X")) {
                     if (turns == 0) {
+                        grid = grid.replace(numb[xCoord][yCoord], 'X');
+                        numb[xCoord][yCoord] = 'X';
+                    }
+                    else if (turns == 1) {
                         grid = grid.replace(numb[xCoord][yCoord], 'X');
                         numb[xCoord][yCoord] = 'X';
                     }
                     break;
                 }
-                while (firstPlayer.equalsIgnoreCase("O")) {
+                while (player.equalsIgnoreCase("O")) {
                     if (turns == 0) {
+                        grid = grid.replace(numb[xCoord][yCoord], 'O');
+                        numb[xCoord][yCoord] = 'O';
+                    }
+                    else if (turns == 1) {
                         grid = grid.replace(numb[xCoord][yCoord], 'O');
                         numb[xCoord][yCoord] = 'O';
                     }
                     break;
                 }
-                grid = Clear.deleteNumbers(grid);
-                System.out.println(grid);
+                System.out.println(Clear.deleteNumbers(grid));
+                turns++;
             }
         }
     }

@@ -12,16 +12,28 @@ public class AI {
         int rand = (int) (Math.random() * 5);
         if (rand == 0)
             return "00";
-        if (rand == 1)
+        else if (rand == 1)
             return "02";
-        if (rand == 2)
+        else if (rand == 2)
             return "11";
-        if (rand == 3)
+        else if (rand == 3)
             return "20";
         else
             return "22";
     }
     static String secondMove(int x, int y) {
-        return "00";
+        if (x == 1 && y == 1) {
+            int z = (int) (Math.random() * 4);
+            if (z == 0)
+                return "00";
+            else if (z == 1)
+                return "02";
+            else if (z == 2)
+                return "20";
+            else
+                return "22";
+        }
+        else
+            return "11";
     }
 }
