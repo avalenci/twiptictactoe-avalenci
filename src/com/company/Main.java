@@ -27,12 +27,14 @@ public class Main {
                 while (firstPlayer.equalsIgnoreCase("X")) {
                     if (turns == 0) {
                         grid = grid.replace(numb[xCoord][yCoord], 'X');
+                        numb[xCoord][yCoord] = 'X';
                     }
                     break;
                 }
                 while (firstPlayer.equalsIgnoreCase("O")) {
                     if (turns == 0) {
                         grid = grid.replace(numb[xCoord][yCoord], 'O');
+                        numb[xCoord][yCoord] = 'O';
                     }
                     break;
                 }

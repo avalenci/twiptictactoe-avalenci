@@ -21,7 +21,7 @@ public class AI {
         else
             return "22";
     }
-    static String secondMove(char a[][]) {
-
+    static String secondMove(int x, int y) {
+        return "00";
     }
 }
