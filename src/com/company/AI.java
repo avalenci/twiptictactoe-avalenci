@@ -36,4 +36,17 @@ public class AI {
         else
             return "11";
     }
+    static String thirdMove(char a[][]) {
+        String t;
+        while (true) {
+            int x = (int) (Math.random() * 3);
+            int y = (int) (Math.random() * 3);
+            String z = "" + a[x][y];
+            if (!(z.equals("X") || z.equals("O"))) {
+                t = Integer.toString(x) + Integer.toString(y);
+                break;
+            }
+        }
+        return t;
+    }
 }

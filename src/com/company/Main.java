@@ -26,8 +26,15 @@ public class Main {
                     xCoord = Integer.parseInt(x);
                     yCoord = Integer.parseInt(y);
                 }
-                if (turns == 1) {
+                else if (turns == 1) {
                     String c = AI.secondMove(xCoord, yCoord);
+                    String x = (c.substring(0, 1));
+                    String y = (c.substring(1));
+                    xCoord = Integer.parseInt(x);
+                    yCoord = Integer.parseInt(y);
+                }
+                else if (turns == 2) {
+                    String c = AI.thirdMove(numb);
                     String x = (c.substring(0, 1));
                     String y = (c.substring(1));
                     xCoord = Integer.parseInt(x);
@@ -44,6 +51,10 @@ public class Main {
                         grid = grid.replace(numb[xCoord][yCoord], 'X');
                         numb[xCoord][yCoord] = 'X';
                     }
+                    else if (turns == 2) {
+                        grid = grid.replace(numb[xCoord][yCoord], 'X');
+                        numb[xCoord][yCoord] = 'X';
+                    }
                     break;
                 }
                 while (player.equalsIgnoreCase("O")) {
@@ -52,6 +63,10 @@ public class Main {
                         numb[xCoord][yCoord] = 'O';
                     }
                     else if (turns == 1) {
+                        grid = grid.replace(numb[xCoord][yCoord], 'O');
+                        numb[xCoord][yCoord] = 'O';
+                    }
+                    else if (turns == 2) {
                         grid = grid.replace(numb[xCoord][yCoord], 'O');
                         numb[xCoord][yCoord] = 'O';
                     }
