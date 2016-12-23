@@ -49,4 +49,13 @@ public class AI {
         }
         return t;
     }
+    static String nextMove(char a[][], String player) {
+        String enemy;
+        if (player.equalsIgnoreCase("X"))
+            enemy = "O";
+        else
+            enemy = "X";
+
+        return "00";
+    }
 }
