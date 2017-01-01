@@ -45,14 +45,16 @@ public class Main {
                     while (true) {
                         while (firstPlayer.equals(player)) {
                             System.out.println(AI.deleteNumbers(grid));
-                            System.out.println("Type the two numbers that correspond with the coordinates of your move.");
+                            if (!(turns > 1))
+                                System.out.println("Type the two numbers that correspond" +
+                                        " with the coordinates of your move.");
                             while (true) {
                                 input.nextLine();
                                 a = input.nextLine();
                                 a = a.replaceAll(" ", "");
                                 String a0 = a.substring(0, 1);
                                 String a1 = a.substring(1);
-                                if ((!(a0.equals("0") && !(a0.equals("1")) && !(a0.equals("2"))))
+                                if ((!(a0.equals("0")) && !(a0.equals("1")) && !(a0.equals("2")))
                                         || (!(a1.equals("0")) && !(a1.equals("1")) && !(a1.equals("2")))) {
                                     System.out.println("Please use valid coordinates only.\nTry Again.");
                                     continue;
@@ -75,11 +77,55 @@ public class Main {
                         }
                         while (firstPlayer.equals(Computer)) {
                             while (turns == 0) {
+                                int rand = (int) (Math.random() * 5);
+                                if (rand == 0) {
+                                    xCoord = 0;
+                                    yCoord = 0;
+                                }
+                                else if (rand == 1) {
+                                    xCoord = 0;
+                                    yCoord = 2;
+                                }
+                                else if (rand == 2) {
+                                    xCoord = 1;
+                                    yCoord = 1;
+                                }
+                                else if (rand == 3) {
+                                    xCoord = 2;
+                                    yCoord = 0;
+                                }
+                                else {
+                                    xCoord = 2;
+                                    yCoord = 2;
+                                }
+                                break;
                             }
                             while (turns == 1) {
+                                if (xCoord == 1 && yCoord == 1) {
+                                    int rand = (int) (Math.random() * 4);
+                                    if (rand == 0) {
+                                        xCoord = 0;
+                                        yCoord = 0;
+                                    } else if (rand == 1) {
+                                        xCoord = 0;
+                                        yCoord = 2;
+                                    } else if (rand == 2) {
+                                        xCoord = 2;
+                                        yCoord = 0;
+                                    } else {
+                                        xCoord = 2;
+                                        yCoord = 2;
+                                    }
+                                    break;
+                                }
                             }
                             while (turns > 1) {
                             }
+                            char replace = numb[xCoord][yCoord];
+                            numb[xCoord][yCoord] = player.charAt(0);
+                            grid = grid.replace(replace, Computer.charAt(0));
+                            turns++;
+                            firstPlayer = player;
                         }
                     }
                 }
