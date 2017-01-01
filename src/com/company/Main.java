@@ -1,5 +1,6 @@
 package com.company;
 
+import java.util.Arrays;
 import java.util.Scanner;
 public class Main {
 
@@ -143,7 +144,7 @@ public class Main {
                                         if (numb[countx][county] == player.charAt(0)) {
                                             countp++;
                                         }
-                                        if (numb[countx][county] == Computer.charAt(0)) {
+                                        else if (numb[countx][county] == Computer.charAt(0)) {
                                             counte++;
                                         }
                                         if (countp == 3) {
@@ -151,27 +152,23 @@ public class Main {
                                             System.out.println("You win!");
                                             boole = false;
                                         }
-                                        else if (counte == 3) {
-                                            System.out.println(AI.deleteNumbers(grid));
-                                            System.out.println("You loose!");
-                                            boole = false;
-                                        }
                                         county++;
+                                        if (county == 3 && counte == 2 && countp == 0) {
+                                            Arrays.fill(numb[countx], Computer.charAt(0));
+                                        }
                                     }
                                     counte = 0;
                                     countp = 0;
+                                    county = 0;
                                     countx++;
                                 }
                                 countx = 0;
-                                county = 0;
-                                counte = 0;
-                                countp = 0;
                                 while (county < 3) {
                                     while (countx < 3) {
                                         if (numb[countx][county] == player.charAt(0)) {
                                             countp++;
                                         }
-                                        if (numb[countx][county] == Computer.charAt(0)) {
+                                        else if (numb[countx][county] == Computer.charAt(0)) {
                                             counte++;
                                         }
                                         if (countp == 3) {
@@ -179,24 +176,15 @@ public class Main {
                                             System.out.println("You win!");
                                             boole = false;
                                         }
-                                        else if (counte == 3) {
-                                            System.out.println(AI.deleteNumbers(grid));
-                                            System.out.println("You loose!");
-                                            boole = false;
-                                        }
                                         countx++;
+                                        if (countx == 3 && counte == 2 && countp == 0) {
+                                            Arrays.fill(numb[county], Computer.charAt(0));
+                                        }
                                     }
                                     counte = 0;
                                     countp = 0;
+                                    countx = 0;
                                     county++;
-                                }
-                                while (xCoord == 3) {
-                                    xCoord = (int)(Math.random() * 3);
-                                    yCoord = (int)(Math.random() * 3);
-                                    if (numb[xCoord][yCoord] == 'X' || numb[xCoord][yCoord] == 'O')
-                                        xCoord = 3;
-                                    else
-                                        break;
                                 }
                                 while (numb[xCoord][yCoord] == 'X' || numb[xCoord][yCoord] == 'O') {
                                     xCoord = (int)(Math.random() * 3);
@@ -206,6 +194,45 @@ public class Main {
                             char replace = numb[xCoord][yCoord];
                             numb[xCoord][yCoord] = Computer.charAt(0);
                             grid = grid.replace(replace, Computer.charAt(0));
+                            if (turns > 1) {
+                                int countx = 0;
+                                int county = 0;
+                                int counte = 0;
+                                int countp = 0;
+                                while (countx < 3) {
+                                    while (county < 3) {
+                                        if (numb[countx][county] == Computer.charAt(0)) {
+                                            counte++;
+                                        }
+                                        if (counte == 3) {
+                                            System.out.println(AI.deleteNumbers(grid));
+                                            System.out.println("You loose!");
+                                            boole = false;
+                                        }
+                                        county++;
+                                    }
+                                    county = 0;
+                                    counte = 0;
+                                    countx++;
+                                }
+                                countx = 0;
+                                while (county < 3) {
+                                    while (countx < 3) {
+                                        if (numb[countx][county] == Computer.charAt(0)) {
+                                            counte++;
+                                        }
+                                        if (counte == 3) {
+                                            System.out.println(AI.deleteNumbers(grid));
+                                            System.out.println("You loose!");
+                                            boole = false;
+                                        }
+                                        countx++;
+                                    }
+                                    countx = 0;
+                                    counte = 0;
+                                    county++;
+                                }
+                            }
                             turns++;
                             firstPlayer = player;
                         }
