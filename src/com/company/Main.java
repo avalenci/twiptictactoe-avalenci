@@ -5,6 +5,7 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
+        boolean boole = true;
         String player, Computer, firstPlayer;
         String grid = " 1 | 2 | 3 \n---+---+---\n 4 | 5 | 6 \n---+---+---\n 7 | 8 | 9 ";
         char numb[][] = {{'1', '2', '3'},
@@ -12,9 +13,9 @@ public class Main {
                          {'7', '8', '9'}};
         int xCoord = 0, yCoord = 0;
         int turns = 0;
-        while (true) {
+        while (boole) {
             System.out.println("Would you like to be X or O?");
-            while (true) {
+            while (boole) {
                 String a = input.next();
                 if (a.equalsIgnoreCase("X")) {
                     player = "X";
@@ -29,7 +30,7 @@ public class Main {
                     continue;
                 }
                 System.out.println("Who will go first?\nA. You\nB. Computer\nC. Random");
-                while (true) {
+                while (boole) {
                     a = input.next();
                     if (a.equalsIgnoreCase("A"))
                         firstPlayer = player;
@@ -42,14 +43,15 @@ public class Main {
                         System.out.println("Try Again.");
                         continue;
                     }
-                    while (true) {
-                        while (firstPlayer.equals(player)) {
+                    while (boole) {
+                        while (firstPlayer.equals(player) && boole) {
                             System.out.println(AI.deleteNumbers(grid));
-                            if (!(turns > 1))
+                            if (!(turns > 1)) {
                                 System.out.println("Type the two numbers that correspond" +
                                         " with the coordinates of your move.");
-                            while (true) {
                                 input.nextLine();
+                            }
+                            while (boole) {
                                 a = input.nextLine();
                                 a = a.replaceAll(" ", "");
                                 String a0 = a.substring(0, 1);
@@ -72,10 +74,11 @@ public class Main {
                                     break;
                                 }
                             }
+                            System.out.println(AI.deleteNumbers(grid + "\n"));
                             turns++;
                             firstPlayer = Computer;
                         }
-                        while (firstPlayer.equals(Computer)) {
+                        while (firstPlayer.equals(Computer) && boole) {
                             while (turns == 0) {
                                 int rand = (int) (Math.random() * 5);
                                 if (rand == 0) {
@@ -130,10 +133,78 @@ public class Main {
                                     xCoord = xCoord + 1;
                                 break;
                             }
-                            while (turns > 1) {
+                            if (turns > 1) {
+                                int countx = 0;
+                                int county = 0;
+                                int counte = 0;
+                                int countp = 0;
+                                while (countx < 3) {
+                                    while (county < 3) {
+                                        if (numb[countx][county] == player.charAt(0)) {
+                                            countp++;
+                                        }
+                                        if (numb[countx][county] == Computer.charAt(0)) {
+                                            counte++;
+                                        }
+                                        if (countp == 3) {
+                                            System.out.println(AI.deleteNumbers(grid));
+                                            System.out.println("You win!");
+                                            boole = false;
+                                        }
+                                        else if (counte == 3) {
+                                            System.out.println(AI.deleteNumbers(grid));
+                                            System.out.println("You loose!");
+                                            boole = false;
+                                        }
+                                        county++;
+                                    }
+                                    counte = 0;
+                                    countp = 0;
+                                    countx++;
+                                }
+                                countx = 0;
+                                county = 0;
+                                counte = 0;
+                                countp = 0;
+                                while (county < 3) {
+                                    while (countx < 3) {
+                                        if (numb[countx][county] == player.charAt(0)) {
+                                            countp++;
+                                        }
+                                        if (numb[countx][county] == Computer.charAt(0)) {
+                                            counte++;
+                                        }
+                                        if (countp == 3) {
+                                            System.out.println(AI.deleteNumbers(grid));
+                                            System.out.println("You win!");
+                                            boole = false;
+                                        }
+                                        else if (counte == 3) {
+                                            System.out.println(AI.deleteNumbers(grid));
+                                            System.out.println("You loose!");
+                                            boole = false;
+                                        }
+                                        countx++;
+                                    }
+                                    counte = 0;
+                                    countp = 0;
+                                    county++;
+                                }
+                                while (xCoord == 3) {
+                                    xCoord = (int)(Math.random() * 3);
+                                    yCoord = (int)(Math.random() * 3);
+                                    if (numb[xCoord][yCoord] == 'X' || numb[xCoord][yCoord] == 'O')
+                                        xCoord = 3;
+                                    else
+                                        break;
+                                }
+                                while (numb[xCoord][yCoord] == 'X' || numb[xCoord][yCoord] == 'O') {
+                                    xCoord = (int)(Math.random() * 3);
+                                    yCoord = (int)(Math.random() * 3);
+                                }
                             }
                             char replace = numb[xCoord][yCoord];
-                            numb[xCoord][yCoord] = player.charAt(0);
+                            numb[xCoord][yCoord] = Computer.charAt(0);
                             grid = grid.replace(replace, Computer.charAt(0));
                             turns++;
                             firstPlayer = player;
