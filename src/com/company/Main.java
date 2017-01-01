@@ -47,11 +47,13 @@ public class Main {
                             System.out.println(AI.deleteNumbers(grid));
                             System.out.println("Type the two numbers that correspond with the coordinates of your move.");
                             while (true) {
+                                input.nextLine();
                                 a = input.nextLine();
                                 a = a.replaceAll(" ", "");
-                                String a0 = a.substring(0);
-                                String a1 = a.substring(0);
-                                if ((a0 != "0" && a0 != "1" && a0 != "2") || (a1 != "0" && a1 != "1" && a1 != "2")) {
+                                String a0 = a.substring(0, 1);
+                                String a1 = a.substring(1);
+                                if ((!(a0.equals("0") && !(a0.equals("1")) && !(a0.equals("2"))))
+                                        || (!(a1.equals("0")) && !(a1.equals("1")) && !(a1.equals("2")))) {
                                     System.out.println("Please use valid coordinates only.\nTry Again.");
                                     continue;
                                 }
@@ -72,7 +74,12 @@ public class Main {
                             firstPlayer = Computer;
                         }
                         while (firstPlayer.equals(Computer)) {
-
+                            while (turns == 0) {
+                            }
+                            while (turns == 1) {
+                            }
+                            while (turns > 1) {
+                            }
                         }
                     }
                 }
