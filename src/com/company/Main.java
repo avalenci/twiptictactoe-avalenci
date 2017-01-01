@@ -102,22 +102,33 @@ public class Main {
                             }
                             while (turns == 1) {
                                 if (xCoord == 1 && yCoord == 1) {
-                                    int rand = (int) (Math.random() * 4);
+                                    int rand = (int)(Math.random() * 4);
                                     if (rand == 0) {
                                         xCoord = 0;
                                         yCoord = 0;
-                                    } else if (rand == 1) {
+                                    }
+                                    else if (rand == 1) {
                                         xCoord = 0;
                                         yCoord = 2;
-                                    } else if (rand == 2) {
+                                    }
+                                    else if (rand == 2) {
                                         xCoord = 2;
                                         yCoord = 0;
-                                    } else {
+                                    }
+                                    else {
                                         xCoord = 2;
                                         yCoord = 2;
                                     }
-                                    break;
                                 }
+                                else if (xCoord != 1 && yCoord != 1) {
+                                    xCoord = 1;
+                                    yCoord = 1;
+                                }
+                                else if (xCoord + 1 > 2 || xCoord - 1 < 0)
+                                    yCoord = yCoord + 1;
+                                else
+                                    xCoord = xCoord + 1;
+                                break;
                             }
                             while (turns > 1) {
                             }
